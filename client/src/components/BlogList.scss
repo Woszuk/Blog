@@ -1,0 +1,32 @@
+.lists {
+    margin: 0 auto;
+    padding: 3rem;
+
+    &__items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+        gap: 2rem;
+    }
+
+    &__item {
+        padding: 1.5rem 3rem;
+        display: grid;
+        grid-template-rows: repeat(2, min-content);
+        gap: 1.2rem;
+        box-shadow: 0 .4rem 1rem -.4rem #333;
+
+        &-title {
+            font-size: 1.8rem;
+        }
+
+        &-content {
+            font-size: 1.5rem;
+            text-indent: 3.5rem;
+        }
+
+        &-link:link,
+        &-link:visited {
+            color: var(--color-primary);
+        }
+    }
+}

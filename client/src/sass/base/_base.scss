@@ -1,0 +1,30 @@
+:root {
+    --color-background-back: rgba(8, 145, 15, 0.301);
+
+    --color-primary: #001a68;
+    --color-primary-alpha: rgba(0, 26, 104, 0.8);
+    --color-primary-background: rgb(230, 227, 215);
+    
+    --color-grey-1: rgb(167, 167, 167);
+
+    --shadow-spread-radius: -1.2rem;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+// #root {
+//     background-color: var(--color-background-back);
+// }
+
+

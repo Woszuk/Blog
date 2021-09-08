@@ -1,0 +1,19 @@
+.header {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    padding: 3rem 8rem;
+    box-shadow: 0px 15px 8px var(--shadow-spread-radius) #333;
+
+    &__item:link,
+    &__item:visited {
+        text-decoration: none;
+        color: var(--color-primary);
+        text-transform: uppercase;
+    }
+
+    &__item{
+        letter-spacing: .3rem;
+    }
+}

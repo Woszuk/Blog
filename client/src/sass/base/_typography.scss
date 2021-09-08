@@ -1,0 +1,30 @@
+.heading-1 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.btn {
+    cursor: pointer;
+    width: 15rem;
+    justify-self: center;
+    padding: 1.5rem 3rem;
+    border: none;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    color: #fff;
+    background-color: var(--color-primary-alpha);
+    transition: all .3s;
+
+    &:hover {
+        background-color: var(--color-primary); 
+    }
+
+    &:active {
+        transform: translateY(.2rem);
+    }
+}
