@@ -1,0 +1,18 @@
+.button {
+    cursor: pointer;
+    height: 4rem;
+    font-size: 1.8rem;
+    background-color: #fff;
+    border: none;
+    border-right: 3px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 10rem;
+
+    &:hover {
+        transition: all .3s;
+    }
+
+    &:active {
+        transform: scale(.97);
+    }
+}

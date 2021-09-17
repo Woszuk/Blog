@@ -10,14 +10,6 @@ class EntryShow extends React.Component {
         this.props.fetchEntry(this.props.match.params.id)
     }
 
-    componentDidUpdate() {
-        document.querySelector('.show').addEventListener('click', () => this.backHistory())
-    }
-
-    backHistory() {
-        history.push('/')
-    }
-
     renderContent() {
         return this.props.entry.content.split('\n').map((str, index) => {
             if(str.trim().length > 0) {
@@ -34,7 +26,7 @@ class EntryShow extends React.Component {
         }
         return (
             <div className="show">
-                <span className="show__arrow">&larr;</span>
+                <span onClick={() => history.push('/') } className="show__arrow">&larr;</span>
                 <h1 className="heading-1 u-margin-bottom-small center">{this.props.entry.title}</h1>
                 <div className="show__container">{this.renderContent()}</div>
             </div>
