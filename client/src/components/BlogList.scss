@@ -19,6 +19,7 @@
     }
 
     &__item {
+        position: relative;
         padding: 1.5rem 3rem;
         display: grid;
         grid-template-rows: repeat(2, min-content);
