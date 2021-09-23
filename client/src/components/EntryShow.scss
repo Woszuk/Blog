@@ -8,6 +8,10 @@
     align-items: center;
     position: relative;
 
+    @media only screen and (max-width: 30rem) {
+        padding: 3rem 1rem;
+    }
+
     &__container {
         text-align: justify;
         text-justify: inter-word;

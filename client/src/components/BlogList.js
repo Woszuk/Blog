@@ -134,7 +134,7 @@ class BlogList extends React.Component {
     render() {
         return (
             <div className="lists">
-                <h1 className="heading-1 u-margin-bottom-small center">Entry List</h1>
+                <h1 className="heading-1 u-margin-bottom-small center">{this.props.entries.length !== 1 ? 'Entry List' : 'Empty, add a new entry!'}</h1>
                 <div className="lists__items">
                     {this.renderList()}
                 </div>
