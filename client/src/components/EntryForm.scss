@@ -1,5 +1,5 @@
 .form {
-    width: 70%;
+    width: clamp(70%, 50rem ,100%);
     margin: 0 auto;
     padding: 1.5rem 3rem ;
     box-shadow: 0px 4px 10px #000;

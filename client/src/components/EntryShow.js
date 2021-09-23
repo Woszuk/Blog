@@ -26,7 +26,7 @@ class EntryShow extends React.Component {
         }
         return (
             <div className="show">
-                <span onClick={() => history.push('/') } className="show__arrow">&larr;</span>
+                <span onClick={() => history.goBack() } className="arrow">&larr;</span>
                 <h1 className="heading-1 u-margin-bottom-small center">{this.props.entry.title}</h1>
                 <div className="show__container">{this.renderContent()}</div>
             </div>

@@ -1,6 +1,7 @@
 .lists {
     margin: 0 auto;
     padding: 3rem;
+    position: relative;
 
     &__items {
         display: grid;
@@ -22,6 +23,7 @@
             right: 1rem;
         }
 
+        &-action,
         &-action:link,
         &-action:visited {
             cursor: pointer;
@@ -58,4 +60,3 @@
         grid-template-columns: repeat(auto-fit, minmax(5rem, 8rem));
     }
 }
-

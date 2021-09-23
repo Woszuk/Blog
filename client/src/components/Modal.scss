@@ -1,0 +1,19 @@
+.modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    margin: auto;
+    padding: 4rem 5rem;
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btns {
+    margin-top: 1.5rem;
+}

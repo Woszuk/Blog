@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
+import history from '../history';
 
 import './EntryForm.scss';
 
@@ -39,6 +40,7 @@ class EntryForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="form">
+                <span onClick={() => history.goBack() } className="arrow">&larr;</span>
                 <Field name="title" component={this.renderInput} label="Title" />
                 <Field name="content" component={this.renderTextarea} label="Content" />
                 <button className="btn">Submit</button>

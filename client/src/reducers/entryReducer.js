@@ -6,9 +6,9 @@ export default (state = {}, action) => {
         case FETCH_ENTRY:
         case CREATE_ENTRY:
         case EDIT_ENTRY:
-            return { ...state, [action.payload.id]: action.payload }
+            return { [action.payload.id]: action.payload }
         case FETCH_ENTRIES:
-            return { ..._.mapKeys(action.payload.data, 'id'), link: action.payload.headers.link}
+            return { ..._.mapKeys(action.payload.data, 'id'), link: action.payload.headers.link}      
         default:
             return state;
     }

@@ -1,32 +1,50 @@
 import React from 'react';
+import { AnimatePresence } from 'framer-motion'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchEntries } from '../actions'
+import { fetchEntries, deleteEntry } from '../actions'
+import history from '../history';
 
 import './BlogList.scss'
+import Modal from './Modal';
 
 class BlogList extends React.Component {
     constructor() {
         super()
         this.state = {
             currentPage: 1,
-            width: 0,
-            contentLength: 350
+            contentLength: 350,
+            modalOpen: false,
+            entry: null
         }
+        this.listener = () => {
+            if(this.state.modalOpen) {
+                this.close();
+            }
+        }     
     }
 
-    componentDidMount() {
-        this.props.fetchEntries('/entries?_page=1&_limit=4');
-        window.addEventListener('resize', () => this.updateDimension())
+    numOfPage() {
+        return this.props.location.search.slice(6);
     }
 
-    updateDimension() {
-        this.setState({ width: window.innerWidth })
-        if(this.state.width <= 650 || this.state.width >= 870) {
-            this.setState({ contentLength: 350 })
-        }else {
-            this.setState({ contentLength: 500 })
-        }
+    close = () => {
+        this.setState({ modalOpen: false })
+    }
+
+    open = () => {
+        this.setState({ modalOpen: true })
+    }
+
+    async componentDidMount() {
+        this._isMounted = true;
+        await this.props.fetchEntries(this.numOfPage() === '' ? 1 : +this.numOfPage());
+        this.setState({ currentPage: this.numOfPage() === '' ? 1 : +this.numOfPage()})
+        document.addEventListener('click',  this.listener)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.listener)
     }
 
     readMore(id, text) {
@@ -54,7 +72,7 @@ class BlogList extends React.Component {
                     <div className="lists__item" key={entry.id}>
                         <div className="lists__item-actions">
                             <Link to={`/entries/edit/${entry.id}`} className="lists__item-action">Edit</Link>
-                            <Link to="" className="lists__item-action">Delete</Link>
+                            <span onClick={(e) => this.onClickDelete(e, entry)} className="lists__item-action">Delete</span>
                         </div>
                         <h2 className="lists__item-title">{entry.title}</h2>
                         {this.renderContent(entry.content, entry.id)}
@@ -62,6 +80,19 @@ class BlogList extends React.Component {
                 )
             }
         })
+    }
+
+    onClickDelete(e, entry) {
+        e.stopPropagation();
+        this.setState({ entry })
+        this.state.modalOpen ? this.close() : this.open()
+    }
+
+    delete = async () => {
+        this.close();
+        await this.props.deleteEntry(this.state.entry.id)
+        await this.props.fetchEntries(this.state.currentPage)
+        this.setState({ currentPage: +this.numOfPage() })
     }
 
     links() {
@@ -88,15 +119,16 @@ class BlogList extends React.Component {
                 if(+page !== this.state.currentPage && !this.checkButton(el, lastPage)){
                     return (
                         <button className="button" key={index} onClick={() => {
-                            this.props.fetchEntries(el[1])
-                            this.setState({ currentPage: +page }) }}>
+                            this.setState({ currentPage: +page })
+                            this.props.fetchEntries(page)
+                            history.push(`/?page=${page}`)
+                            }}>
                             {this.checkButton(el, lastPage) ? '' : `${el[0]}`}
                         </button>
                     )
                 } 
             });
         } 
-        
     }
 
     render() {
@@ -109,6 +141,13 @@ class BlogList extends React.Component {
                 <div className="lists__pagination">
                     {this.renderPagination()}
                 </div>
+                <AnimatePresence
+                    initial={false}
+                    exitBeforeEnter={true}
+                    onExitComplete={() => null}
+                >
+                    {this.state.modalOpen && <Modal handleClose={this.close} handleDelete={this.delete} text={this.state.entry.title}/>}
+                </AnimatePresence>
             </div>
         )
     }
@@ -121,4 +160,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { fetchEntries })(BlogList);
+export default connect(mapStateToProps, { fetchEntries, deleteEntry })(BlogList);
